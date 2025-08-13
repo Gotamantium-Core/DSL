@@ -10,7 +10,7 @@ typedef struct Node {
 void push(Node** top, char* url) {
     Node* new = (Node *) malloc(sizeof(Node));
     strcpy(new->url, url);
-    new->next = NULL;
+    new->next = *top;
     *top = new;
 }
 
@@ -39,7 +39,7 @@ void visit(Node** back, Node** forward, char* current, char* url) {
 void goBack(Node** back, Node** forward, char* current) {
     char temp[100];
     if (pop(back, temp)) {
-        push(forward, temp);
+        push(forward, current);
         strcpy(current, temp);
         printf("Back to: %s\n", current);
         return;
@@ -83,4 +83,5 @@ int main() {
         }
     }
     return 0;
+
 }
